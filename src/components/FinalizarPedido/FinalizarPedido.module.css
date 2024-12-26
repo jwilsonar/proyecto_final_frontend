@@ -205,6 +205,10 @@
 }
 
 @media (max-width: 768px) {
+    .progress {
+        width: 100%;
+        margin-top: 1.5rem;
+    }
     .container {
         padding: 1rem;
     }

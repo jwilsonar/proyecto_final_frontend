@@ -25,19 +25,38 @@ const defaultProducts = Array.from({ length: 30 }, (_, index) => ({
 export function ProductsProvider({ children }) {
     const [products] = useState(defaultProducts);
     const [currentPage, setCurrentPage] = useState(1);
+    const [filters, setFilters] = useState({
+        precio: { min: 0, max: 1000 },
+        categoria: '',
+        plataforma: ''
+    });
     const productsPerPage = 8;
 
     const getFeaturedProducts = () => {
         return products.slice(0, 5);
     };
 
-    const getPaginatedProducts = () => {
-        const indexOfLastProduct = currentPage * productsPerPage;
-        const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-        return products.slice(indexOfFirstProduct, indexOfLastProduct);
+    const getFilteredProducts = () => {
+        return products.filter(product => {
+            const cumplePrecio = product.precio >= filters.precio.min && 
+                               product.precio <= filters.precio.max;
+            const cumpleCategoria = !filters.categoria || 
+                                  product.categoria === filters.categoria;
+            const cumplePlataforma = !filters.plataforma || 
+                                   product.plataforma === filters.plataforma;
+            
+            return cumplePrecio && cumpleCategoria && cumplePlataforma;
+        });
     };
 
-    const totalPages = Math.ceil(products.length / productsPerPage);
+    const getPaginatedProducts = () => {
+        const filteredProducts = getFilteredProducts();
+        const indexOfLastProduct = currentPage * productsPerPage;
+        const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+        return filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+    };
+
+    const totalPages = Math.ceil(getFilteredProducts().length / productsPerPage);
 
     const changePage = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -57,6 +76,14 @@ export function ProductsProvider({ children }) {
             .slice(0, limit);
     };
 
+    const updateFilters = (newFilters) => {
+        setFilters(prevFilters => ({
+            ...prevFilters,
+            ...newFilters
+        }));
+        setCurrentPage(1);
+    };
+
     return (
         <ProductsContext.Provider
             value={{
@@ -67,7 +94,10 @@ export function ProductsProvider({ children }) {
                 totalPages,
                 changePage,
                 getProductBySlug,
-                getSimilarProducts
+                getSimilarProducts,
+                filters,
+                updateFilters,
+                getFilteredProducts
             }}
         >
             {children}
