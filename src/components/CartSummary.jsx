@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useToast } from '../context/ToastContext';
 
 function CartSummary({ total }) {
     const { addToast } = useToast();
+    const navigate = useNavigate();
 
     const handleCheckout = () => {
         addToast('Función de pago en desarrollo', 'info');
+        navigate('/finalizar-pedido');
     };
 
     return (

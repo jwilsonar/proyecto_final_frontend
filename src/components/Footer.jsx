@@ -3,19 +3,18 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
     return (
-        <footer>
+        <footer>                           
             <div>
-                <ul>
-                    <li><Link to="/login">Inicio de sesión</Link></li>
-                    <li><Link to="/register">Registro</Link></li>
-                    <li><Link to="/products">Productos</Link></li>
-                </ul>
+                <p>Joy Box - Tu tienda de videojuegos</p>
+                <p>Ubicación: Av. ficticia Calle Inventada, Somewhere</p>
+                <p>Teléfono: <a href="tel:+51980000000">+51 980000000</a></p>
             </div>
+            
             <div>
-                <p>Todos los derechos reservados.</p>
+                <p style={{ fontSize: '.85rem', color: 'gray' }}>© Todos los derechos reservados. Tienda ficticia Joy Box</p>
             </div>
         </footer>
     );
 }
 
-export default Footer; 
+export default Footer;

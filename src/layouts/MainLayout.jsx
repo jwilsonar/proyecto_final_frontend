@@ -1,18 +1,21 @@
 import React from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import { Outlet } from 'react-router-dom';
-const MainLayout = ({ children }) => {
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer"
+
+import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
+
+function MainLayout() {
     return (
         <>
             <Navbar />
-            
-            <Outlet />
-            
+            <Breadcrumbs />
+            <main>
+                <Outlet />
+            </main>
             <Footer />
         </>
     );
-};
+}
 
 export default MainLayout;

@@ -18,7 +18,7 @@ function Cart() {
     return (
         <div className="container">
             <div className="cart-container">
-                <h2>Carrito de Compras</h2>
+                <h2 style={{marginBottom: '2rem'}}>Carrito de Compras</h2>
                 <div className="cart-items">
                     {state.items.map(item => (
                         <CartItem key={item.id} item={item} />

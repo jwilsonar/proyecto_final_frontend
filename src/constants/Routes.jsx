@@ -5,6 +5,7 @@ import Products from '../pages/Products';
 import Cart from '../pages/Cart';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Producto from '../pages/Producto';
+import FinalizarPedido from '../pages/FinalizarPedido';
 
 import MainLayout from '../layouts/MainLayout';
 
@@ -50,8 +51,16 @@ const routes = [
                 )
             },
             {
-                path: 'producto/:slug',
+                path: 'products/:slug',
                 element: <Producto />
+            },
+            {
+                path: 'finalizar-pedido',
+                element: (
+                    <ProtectedRoute>
+                        <FinalizarPedido />
+                    </ProtectedRoute>
+                )
             }
         ]
     }
