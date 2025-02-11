@@ -26,7 +26,7 @@ export function ProductsProvider({ children }) {
     const [products] = useState(defaultProducts);
     const [currentPage, setCurrentPage] = useState(1);
     const [filters, setFilters] = useState({
-        precio: { min: 0, max: 1000 },
+        precio: { min: 0, max: 1000  },
         categoria: '',
         plataforma: ''
     });
